@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Teedy Custom Metrics"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>
+Custom PMD ruleset focused on structural metrics for the Teedy Java modules.
+    </description>
+
+    <rule ref="category/java/design.xml/CyclomaticComplexity" />
+    <rule ref="category/java/design.xml/CouplingBetweenObjects" />
+
+    <rule name="LinesOfCode"
+          language="java"
+          since="1.0.0"
+          class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+          message="This declaration exceeds the configured Lines of Code (LoC) threshold.">
+        <description>
+Reports classes, methods, and constructors whose physical lines of code exceed the configured limits.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="maxClassLoc" type="Integer" description="Maximum allowed LoC for a class" min="1" max="100000" value="500" />
+            <property name="maxExecutableLoc" type="Integer" description="Maximum allowed LoC for a method or constructor" min="1" max="100000" value="80" />
+            <property name="xpath">
+                <value><![CDATA[
+//ClassDeclaration[metric('LINES_OF_CODE') > $maxClassLoc]
+| //ConstructorDeclaration[metric('LINES_OF_CODE') > $maxExecutableLoc]
+| //MethodDeclaration[metric('LINES_OF_CODE') > $maxExecutableLoc]
+]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule name="WeightedMethodsPerClass"
+          language="java"
+          since="1.0.0"
+          class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+          message="This class exceeds the configured Weighted Methods per Class (WMC) threshold.">
+        <description>
+Reports concrete classes whose weighted method count is above the configured threshold.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="maxWmc" type="Integer" description="Maximum allowed WMC for a class" min="1" max="100000" value="80" />
+            <property name="xpath">
+                <value><![CDATA[
+//ClassDeclaration[@Interface = false()][metric('WEIGHED_METHOD_COUNT') > $maxWmc]
+]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule name="LackOfCohesionInMethods"
+          language="java"
+          since="1.0.0"
+          class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+          message="This class shows low cohesion and should be reviewed for LCOM-related design issues.">
+        <description>
+PMD 7 exposes Tight Class Cohesion (TCC) as a built-in Java metric rather than a direct LCOM metric.
+This rule flags classes whose TCC is below the configured minimum, which is the inverse signal of
+high lack of cohesion in methods (LCOM-style) behaviour.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="minimumMethodCount" type="Integer" description="Minimum number of methods before cohesion is evaluated" min="2" max="100000" value="2" />
+            <property name="minTcc" type="Double" description="Minimum acceptable Tight Class Cohesion (inverse indicator of LCOM)" min="0.0" max="1.0" value="0.33" />
+            <property name="xpath">
+                <value><![CDATA[
+//ClassDeclaration[
+    @Interface = false()
+    and count(ClassBody/MethodDeclaration) >= $minimumMethodCount
+    and metric('TIGHT_CLASS_COHESION') < $minTcc
+]
+]]></value>
+            </property>
+        </properties>
+    </rule>
+</ruleset>
