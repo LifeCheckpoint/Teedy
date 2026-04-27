@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+  <properties>
+    <title>Teedy Project Site</title>
+  </properties>
+  <body>
+    <section name="Teedy Project Site">
+      <p>This site contains project documentation and generated Maven reports for Teedy.</p>
+      <p>The testing reports page links to the generated Surefire test report and JaCoCo coverage report in the staged multi-module site.</p>
+    </section>
+  </body>
+</document>

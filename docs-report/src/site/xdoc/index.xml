@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+  <properties>
+    <title>Docs Reports</title>
+  </properties>
+  <body>
+    <section name="Docs Reports">
+      <p>This module publishes the aggregated JaCoCo coverage report for the Teedy Maven reactor.</p>
+      <p>The aggregated Surefire test report is published from the parent site. Run <code>mvn clean test site site:stage -Dmaven.test.failure.ignore=true</code> from the project root, then open the staged site under <code>target/staging</code>.</p>
+    </section>
+  </body>
+</document>

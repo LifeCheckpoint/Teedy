@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Docs Reports">
+  <body>
+    <menu name="Coverage Reports">
+      <item name="JaCoCo Coverage Report" href="jacoco-aggregate/index.html" />
+    </menu>
+    <menu ref="reports" />
+  </body>
+</project>

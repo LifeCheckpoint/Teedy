@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+  <properties>
+    <title>Testing Reports</title>
+  </properties>
+  <body>
+    <section name="Testing Reports">
+      <p>Run <code>mvn clean test site site:stage -Dmaven.test.failure.ignore=true</code> from the project root to execute tests, collect coverage data, generate the Maven site, and stage the multi-module site under <code>target/staging</code>.</p>
+      <table>
+        <tr>
+          <th>Report</th>
+          <th>Description</th>
+          <th>Site path</th>
+        </tr>
+        <tr>
+          <td><a href="surefire-report.html">Surefire Test Report</a></td>
+          <td>Aggregated unit test execution results generated from Maven Surefire reports.</td>
+          <td><code>target/staging/surefire-report.html</code></td>
+        </tr>
+        <tr>
+          <td><a href="docs-report/jacoco-aggregate/index.html">JaCoCo Coverage Report</a></td>
+          <td>Aggregated code coverage report generated from JaCoCo execution data.</td>
+          <td><code>target/staging/docs-report/jacoco-aggregate/index.html</code></td>
+        </tr>
+      </table>
+    </section>
+  </body>
+</document>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Teedy">
+  <bannerLeft>
+    <name>Teedy</name>
+    <href>https://github.com/sismics/docs</href>
+  </bannerLeft>
+
+  <body>
+    <menu name="Documentation">
+      <item name="Overview" href="index.html" />
+      <item name="Testing Reports" href="testing-reports.html" />
+    </menu>
+    <menu name="Test Reports">
+      <item name="Surefire Test Report" href="surefire-report.html" />
+      <item name="JaCoCo Coverage Report" href="docs-report/jacoco-aggregate/index.html" />
+    </menu>
+    <menu ref="reports" />
+    <menu ref="modules" />
+  </body>
+</project>
