@@ -29,4 +29,15 @@ public class TestValidationUtil {
             // NOP
         }
     }
+
+    @Test
+    public void testValidateRequiredNull() throws Exception {
+        ValidationUtil.validateRequired("value", "field");
+        try {
+            ValidationUtil.validateRequired(null, "field");
+            Assert.fail();
+        } catch (ClientException e) {
+            Assert.assertEquals(400, e.getResponse().getStatus());
+        }
+    }
 }
