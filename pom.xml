@@ -160,17 +160,6 @@
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-pmd-plugin.version}</version>
-        <configuration>
-          <rulesets>
-            <ruleset>${maven.multiModuleProjectDirectory}/customize-rules.xml</ruleset>
-          </rulesets>
-        </configuration>
-      </plugin>
- 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
         <version>${org.apache.maven.plugins.maven-site-plugin.version}</version>
       </plugin>
@@ -204,24 +193,6 @@
         </reportSets>
       </plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-pmd-plugin.version}</version>
-        <inherited>false</inherited>
-        <configuration>
-          <rulesets>
-            <ruleset>customize-rules.xml</ruleset>
-          </rulesets>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>aggregate-pmd</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
     </plugins>
   </reporting>
 
