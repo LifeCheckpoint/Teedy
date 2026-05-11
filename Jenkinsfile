@@ -64,7 +64,7 @@ pipeline {
             archiveArtifacts artifacts: '**/target/site/**/*.*', fingerprint: true, allowEmptyArchive: true
             archiveArtifacts artifacts: '**/target/**/*.jar', fingerprint: true, allowEmptyArchive: true
             archiveArtifacts artifacts: '**/target/**/*.war', fingerprint: true, allowEmptyArchive: true
-            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
+            junit allowEmptyResults: true, skipPublishingChecks: true, testResults: '**/target/surefire-reports/*.xml'
         }
     }
 }
