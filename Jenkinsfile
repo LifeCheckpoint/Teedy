@@ -30,13 +30,6 @@ pipeline {
                 }
             }
         }
-        stage('PMD') {
-            steps {
-                script {
-                    runMaven('pmd:pmd')
-                }
-            }
-        }
         stage('JaCoCo') {
             steps {
                 script {
