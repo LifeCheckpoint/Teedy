@@ -1,53 +1,77 @@
+def runMaven(String goals) {
+    if (isUnix()) {
+        sh "mvn ${goals}"
+    } else {
+        bat "mvn ${goals}"
+    }
+}
+
 pipeline {
     agent any
     stages {
         stage('Clean') {
             steps {
-                sh 'mvn clean'
+                script {
+                    runMaven('clean')
+                }
             }
         }
         stage('Compile') {
             steps {
-                sh 'mvn compile'
+                script {
+                    runMaven('compile')
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test -Dmaven.test.failure.ignore=true'
+                script {
+                    runMaven('test -Dmaven.test.failure.ignore=true')
+                }
             }
         }
         stage('PMD') {
             steps {
-                sh 'mvn pmd:pmd'
+                script {
+                    runMaven('pmd:pmd')
+                }
             }
         }
         stage('JaCoCo') {
             steps {
-                sh 'mvn jacoco:report'
+                script {
+                    runMaven('jacoco:report')
+                }
             }
         }
         stage('Javadoc') {
             steps {
-                sh 'mvn javadoc:javadoc'
+                script {
+                    runMaven('javadoc:javadoc')
+                }
             }
         }
         stage('Site') {
             steps {
-                sh 'mvn site'
+                script {
+                    runMaven('site')
+                }
             }
         }
         stage('Package') {
             steps {
-                sh 'mvn package -DskipTests'
+                script {
+                    runMaven('package -DskipTests')
+                }
             }
         }
     }
     post {
         always {
-            archiveArtifacts artifacts: '**/target/site/**/*.*', fingerprint: true
-            archiveArtifacts artifacts: '**/target/**/*.jar', fingerprint: true
-            archiveArtifacts artifacts: '**/target/**/*.war', fingerprint: true
-            junit '**/target/surefire-reports/*.xml'
+            archiveArtifacts artifacts: '**/target/site/**/*.*', fingerprint: true, allowEmptyArchive: true
+            archiveArtifacts artifacts: '**/target/**/*.jar', fingerprint: true, allowEmptyArchive: true
+            archiveArtifacts artifacts: '**/target/**/*.war', fingerprint: true, allowEmptyArchive: true
+            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
         }
     }
 }
