@@ -40,7 +40,7 @@ pipeline {
         stage('Javadoc') {
             steps {
                 script {
-                    runMaven('javadoc:javadoc')
+                    runMaven('install javadoc:javadoc -DskipTests')
                 }
             }
         }
